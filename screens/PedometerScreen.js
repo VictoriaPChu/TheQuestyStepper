@@ -6,7 +6,6 @@ import {
   View,
   ImageBackground,
   Vibration,
-  Button,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
@@ -20,7 +19,6 @@ export default function PedometerScreen() {
     hp,
     statusEffects,
     inventory,
-    setSelectedCharacter,
     currentLocation,
     knownCharacters,
   } = useContext(CharacterContext);
@@ -146,26 +144,36 @@ export default function PedometerScreen() {
             </View>
 
             <View style={styles.buttonContainer}>
-              <Button
-                title="View Bestiary"
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={() => navigation.navigate("BestiaryScreen")}
-              />
-              <Button
-                title="View Inventory"
+              >
+                <Text style={styles.buttonText}>View Bestiary</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={() => navigation.navigate("InventoryScreen")}
-              />
-              <Button
-                title="View/Change Locations"
+              >
+                <Text style={styles.buttonText}>View Inventory</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={() => navigation.navigate("KnownLocationsScreen")}
-              />
-              <Button
-                title="View Known Characters"
+              >
+                <Text style={styles.buttonText}>View/Change Locations</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={() => navigation.navigate("KnownCharactersScreen")}
-              />
-              <Button
-                title="Check Quest Completion"
+              >
+                <Text style={styles.buttonText}>View Known Characters</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={checkQuestCompletion}
-              />
+              >
+                <Text style={styles.buttonText}>Check Quest Completion</Text>
+              </TouchableOpacity>
             </View>
 
             {/* Display quest status message */}
@@ -174,10 +182,12 @@ export default function PedometerScreen() {
             ) : null}
             {/* Display end screen button if quest is complete */}
             {questStatusMessage === "Quest Complete!" && (
-              <Button
-                title="Proceed to End Screen"
+              <TouchableOpacity
+                style={styles.largeButton}
                 onPress={() => navigation.navigate("EndScreen")}
-              />
+              >
+                <Text style={styles.buttonText}>Proceed to End Screen</Text>
+              </TouchableOpacity>
             )}
           </View>
         </ScrollView>
@@ -266,11 +276,27 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 20,
     width: "80%",
+    alignItems: "center",
+  },
+  largeButton: {
+    backgroundColor: "rgba(46, 204, 113, 0.8)",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginVertical: 10,
+    width: "100%",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
   },
   questStatusText: {
     fontSize: 18,
+    fontWeight: "bold",
     color: "white",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(231, 76, 60, 0.8)",
     padding: 10,
     borderRadius: 10,
     textAlign: "center",
