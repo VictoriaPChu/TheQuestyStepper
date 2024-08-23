@@ -9,8 +9,13 @@ export const SpecialCharacters = [
     dialogue: [
       "WELCOME TO THE GAME! MAKE SURE TO CHECK EVERY CORNER FOR SECRETS!",
       "NEED A HAND? I'VE GOT TIPS FOR DAYS, FRIEND!",
-      "DON'T FORGET TO TALK TO STRANGE CHARACTERS. THEY MIGHT HAVE IMPORTANT CLUES!",
-      "LOOK FOR THE 3 WISHING STONES TO ACHIEVE YOUR HEARTS DESIRE",
+      "CHANGE LOCATION TO FIGHT DIFFERENT ENEMIES AND MEET NEW PEOPLE WITH THE VIEW/CHANGE LOCATION BUTTON",
+      "HELP THE NPCS TO PROGRESS, YOU CAN FIND THEM BY WALKING AROUND IN THEIR LOCATION",
+      "THERE ARE 10 LOCATIONS, 6 NPCS, and 15 ENEMIES, YOU MUST ENCOUNTER THEM TO PROGRESS IN YOUR QUEST",
+      "DONT FORGET TO CHECK QUEST COMPLETION FOR A HINT ON WHAT TO DO NEXT",
+      "CANT FIND SOMETHING? CHECK YOUR BESTIARY FOR ITEM DROPS AND YOUR LOCATIONS FOR LISTS OF ENCOUNTERS AT THOSE LOCATIONS",
+      "SCREEN STUCK? TRY HITTING BACK ON YOUR QUESTY STEPPER OR IN THE APP",
+      "BUTTON WONT CLICK? TRY SCROLLING ON THE QUESTY STEPPER",
       "THROW SOME TENTACLE GOO FROM THE OCTOBATS TO MAKE ME STOP TUTORIAL NPCING",
     ],
     quest_items: ["Tentacle Goo"],
@@ -85,7 +90,7 @@ export const SpecialCharacters = [
     name: "Captain Chonkers",
     description:
       "A massive, sleeping cat that is somehow the key to your heart's desire.",
-    location: "Whale Infested Waters",
+    location: "Outdoor Cat Tavern",
     dialogue: [
       "Zzz... (The Captain slumbers deeply. You notice three small indentations, just the right size for wishing stones.)",
       "If you place the stones here, maybe... just maybe...",

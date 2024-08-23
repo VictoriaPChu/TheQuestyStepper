@@ -84,7 +84,10 @@ export default function PedometerScreen() {
     const hasHealingNoodles = inventory.includes("Healing Noodles");
     const hasHeartsDesire = inventory.includes("Heart's Desire");
 
-    if (!hasWishingStone1 || !hasWishingStone2 || !hasWishingStone3) {
+    if (
+      (!hasWishingStone1 || !hasWishingStone2 || !hasWishingStone3) &&
+      !hasHeartsDesire
+    ) {
       setQuestStatusMessage("Seek out the Wishing Stones.");
     } else if (
       hasWishingStone1 &&

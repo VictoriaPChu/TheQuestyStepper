@@ -31,9 +31,14 @@ const BestiaryScreen = () => {
                 <Text style={styles.enemyName}>{enemy}</Text>
                 <Text style={styles.enemyCount}>Defeated: {count}</Text>
                 {encounter && (
-                  <Text style={styles.enemyLocation}>
-                    Location: {encounter.location}
-                  </Text>
+                  <>
+                    <Text style={styles.enemyLocation}>
+                      Location: {encounter.location}
+                    </Text>
+                    <Text style={styles.itemDrop}>
+                      Item Drops: {encounter.item_drop.join(", ")}
+                    </Text>
+                  </>
                 )}
               </View>
             </View>
@@ -94,6 +99,11 @@ const styles = StyleSheet.create({
   enemyLocation: {
     fontSize: 16,
     color: "#888",
+  },
+  itemDrop: {
+    fontSize: 16,
+    color: "#555",
+    marginTop: 5,
   },
   noEntries: {
     fontSize: 16,

@@ -2,17 +2,46 @@ import React, { useContext } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { CharacterContext } from "../CharacterContext";
 
+const highlightItems = [
+  "Wishing Stone 1",
+  "Wishing Stone 2",
+  "Wishing Stone 3",
+  "Healing Noodles",
+  "Note on the Curse of the Tutorial Npc",
+  "Heart's Desire",
+];
+
 const InventoryScreen = () => {
   const { inventory } = useContext(CharacterContext);
+
+  // Function to count occurrences of each item
+  const countOccurrences = (arr) => {
+    return arr.reduce((acc, item) => {
+      acc[item] = (acc[item] || 0) + 1;
+      return acc;
+    }, {});
+  };
+
+  const itemCounts = countOccurrences(inventory);
+
+  // Function to determine if the item should be highlighted
+  const isHighlighted = (item) => highlightItems.includes(item);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Inventory</Text>
       <ScrollView style={styles.scrollContainer}>
-        {inventory.length > 0 ? (
-          inventory.map((item, index) => (
-            <View key={index} style={styles.item}>
-              <Text style={styles.itemName}>{item}</Text>
+        {Object.entries(itemCounts).length > 0 ? (
+          Object.entries(itemCounts).map(([item, count]) => (
+            <View key={item} style={styles.item}>
+              <Text
+                style={[
+                  styles.itemName,
+                  isHighlighted(item) && styles.highlightedItem,
+                ]}
+              >
+                {item} {count > 1 && `(${count})`}
+              </Text>
             </View>
           ))
         ) : (
@@ -44,6 +73,10 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 18,
+  },
+  highlightedItem: {
+    fontWeight: "bold",
+    color: "gold", // Highlight color, you can customize it
   },
   noItems: {
     fontSize: 16,

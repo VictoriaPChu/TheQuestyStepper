@@ -6,31 +6,35 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  TouchableOpacity, // Import TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import { useNavigation } from "@react-navigation/native";
 import { CharacterContext } from "../CharacterContext";
 import { locations } from "../locations";
 import { assetsMap } from "../assetsMap";
 
 const KnownLocationsScreen = () => {
   const { knownLocations, setCurrentLocation } = useContext(CharacterContext);
-  const navigation = useNavigation(); // Access navigation object
+  const navigation = useNavigation();
 
   const handleLocationPress = (locationName) => {
-    setCurrentLocation(locationName); // Set current location
-    navigation.navigate("PedometerScreen"); // Navigate back to PedometerScreen
+    setCurrentLocation(locationName);
+    navigation.navigate("PedometerScreen");
   };
 
   const renderLocation = (locationName) => {
     const location = locations.find((loc) => loc.name === locationName);
     if (!location) return null;
 
+    // Format enemies and special characters with labels and commas
+    const enemies = location.enemies?.join(", ") || "None";
+    const specialCharacters = location.special_characters?.join(", ") || "None";
+
     return (
       <TouchableOpacity
         key={location.name}
         style={styles.item}
-        onPress={() => handleLocationPress(location.name)} // Handle tap
+        onPress={() => handleLocationPress(location.name)}
       >
         {assetsMap[locationName] && (
           <Image
@@ -40,13 +44,28 @@ const KnownLocationsScreen = () => {
         )}
         <Text style={styles.locationName}>{location.name}</Text>
         <Text style={styles.locationDescription}>{location.description}</Text>
+        <Text style={styles.locationDescription}>
+          <Text style={styles.label}>Enemies: </Text>
+          {enemies}
+        </Text>
+        <Text style={styles.locationDescription}>
+          <Text style={styles.label}>Special Characters: </Text>
+          {specialCharacters}
+        </Text>
       </TouchableOpacity>
     );
   };
 
+  const totalLocations = 10;
+  const discoveredLocations = knownLocations.length;
+  const remainingLocations = totalLocations - discoveredLocations;
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Known Locations</Text>
+      <Text style={styles.counter}>
+        {discoveredLocations} out of {totalLocations} locations discovered
+      </Text>
       <ScrollView style={styles.scrollContainer}>
         {knownLocations.map((locationName) => renderLocation(locationName))}
       </ScrollView>
@@ -55,7 +74,7 @@ const KnownLocationsScreen = () => {
 };
 
 const { width: screenWidth } = Dimensions.get("window");
-const imageSize = screenWidth * 0.8; // Adjust image size to fit on screen
+const imageSize = screenWidth * 0.8;
 
 const styles = StyleSheet.create({
   container: {
@@ -66,7 +85,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    marginBottom: 10,
+  },
+  counter: {
+    fontSize: 18,
     marginBottom: 20,
+    color: "#333",
+    fontWeight: "bold",
   },
   scrollContainer: {
     flex: 1,
@@ -75,7 +100,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    alignItems: "center", // Center align items in the item view
+    alignItems: "center",
   },
   locationName: {
     fontSize: 18,
@@ -85,13 +110,17 @@ const styles = StyleSheet.create({
   locationDescription: {
     fontSize: 16,
     color: "#555",
-    textAlign: "center", // Center align text
+    textAlign: "center",
   },
   locationImage: {
     width: imageSize,
-    height: imageSize * 0.5, // Adjust height proportionally
+    height: imageSize * 0.5,
     marginBottom: 10,
-    resizeMode: "contain", // Ensure image fits within bounds
+    resizeMode: "contain",
+  },
+  label: {
+    fontWeight: "bold",
+    color: "#333",
   },
 });
 
